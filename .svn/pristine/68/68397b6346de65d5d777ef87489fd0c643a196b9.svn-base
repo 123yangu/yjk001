@@ -1,0 +1,60 @@
+package com.yeehealth.yjk.activity.ui;
+
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
+import com.yeehealth.yjk.R;
+import com.yeehealth.yjk.activity.base.BaseActivity;
+
+public class SetNicknameActivity extends BaseActivity implements
+		OnClickListener {
+	/** 昵称输入框 */
+	private EditText et_nickname;
+	/** 返回按钮 */
+	private ImageButton ib_back;
+	/** 标题 */
+	private TextView tv_title;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.layout_setnickname);
+		findViewById();
+		initView();
+		initListener();
+	}
+
+	@Override
+	protected void findViewById() {
+		et_nickname = (EditText) findViewById(R.id.et_nickname);
+		ib_back = (ImageButton) findViewById(R.id.ib_back);
+		tv_title = (TextView) findViewById(R.id.tv_title);
+	}
+
+	@Override
+	protected void initView() {
+		tv_title.setText("设置昵称");
+	}
+
+	@Override
+	protected void initListener() {
+		ib_back.setOnClickListener(this);
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.ib_back:
+			finish();
+			break;
+
+		default:
+			break;
+		}
+	}
+
+}

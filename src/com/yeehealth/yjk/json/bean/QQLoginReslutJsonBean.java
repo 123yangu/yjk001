@@ -1,0 +1,91 @@
+package com.yeehealth.yjk.json.bean;
+
+import java.io.Serializable;
+
+/***
+ * @ClassName QQLoginReslutJsonBean
+ * @Description 获得qq用户通过服务端验证
+ * @author 陈昌燕
+ * @Copyright 2015, 深圳壹键康科技有限公司 All Rights Reserved.
+ * @date 2015-3-19,下午2:10:08
+ */
+public class QQLoginReslutJsonBean extends JsonBean<QQLoginReslutJsonBean> implements Serializable{
+	
+	
+	private static final long serialVersionUID = 1L;
+	/**用户token*/
+	private String token ;
+	/**用户名*/
+	private String username;
+	/**邮箱*/
+	private String email;
+	/**手机*/
+	private String mobile;
+	/**邮箱验证 0未验证 1已验证*/
+	private String email_validated;
+	/**手机验证 0未验证 1已验证*/
+	private String mobile_validated;
+	/**头像地址*/
+	private String avatar;
+	/**昵称*/
+	private String nickname;
+	/**是否修改过用户名 0没有修改 1已修改*/
+	private String username_valid;
+	public String getToken() {
+		return token;
+	}
+	public void setToken(String token) {
+		this.token = token;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getMobile() {
+		return mobile;
+	}
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+	public String getEmail_validated() {
+		return email_validated;
+	}
+	public void setEmail_validated(String email_validated) {
+		this.email_validated = email_validated;
+	}
+	public String getAvatar() {
+		return avatar;
+	}
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public String getUsername_valid() {
+		return username_valid;
+	}
+	public void setUsername_valid(String username_valid) {
+		this.username_valid = username_valid;
+	}
+	public String getMobile_validated() {
+		return mobile_validated;
+	}
+	public void setMobile_validated(String mobile_validated) {
+		this.mobile_validated = mobile_validated;
+	}
+	
+	
+
+}

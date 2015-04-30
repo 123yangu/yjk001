@@ -1,0 +1,88 @@
+package com.yeehealth.yjk.activity.ui;
+
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.yeehealth.yjk.R;
+import com.yeehealth.yjk.R.layout;
+import com.yeehealth.yjk.activity.base.BaseActivity;
+import com.yeehealth.yjk.utils.StringUtils;
+
+/**
+ * @ClassName ChangeUserNameActivity
+ * @Description 修改用户名
+ * @author 谭元元
+ * @Copyright 2015, 深圳壹键康科技有限公司 All Rights Reserved.
+ * @date 2015-3-17,下午3:20:11
+ */
+public class ChangeUserNameActivity extends BaseActivity implements
+		OnClickListener {
+	/** 用户名输入框 */
+	private EditText et_username;
+	/** 完成按钮 */
+	private Button btn_finish;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.layout_change_username);
+		findViewById();
+		initView();
+		initListener();
+	}
+
+	@Override
+	protected void findViewById() {
+		et_username = (EditText) findViewById(R.id.et_username);
+		btn_finish = (Button) findViewById(R.id.btn_finish);
+	}
+
+	@Override
+	protected void initView() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void initListener() {
+		btn_finish.setOnClickListener(this);
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.btn_finish:
+			String username = et_username.getText().toString().trim();
+			if (StringUtils.isEmpty(username)) {
+				Toast.makeText(this, "用户名不能为空", 0).show();
+			} else {
+				checkUserName(username);
+			}
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	/**
+	 * @Title: check
+	 * @Description: 判断用户名是否已经存在
+	 * @param username
+	 *            void
+	 * @author 谭元元
+	 * @date2015-3-17,下午4:11:45
+	 * @Copyright: 2015 深圳市壹键康科技有限公司. All rights reserved.
+	 * @throws
+	 */
+	private void checkUserName(String username) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

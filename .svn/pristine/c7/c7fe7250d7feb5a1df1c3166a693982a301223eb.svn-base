@@ -1,0 +1,28 @@
+package com.yeehealth.yjk.json.bean;
+
+import java.io.Serializable;
+
+public class QQUserBean implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	/**qq昵称*/
+	private String nickname;
+	/**QQ用户的头像*/
+	private String qqUserHeaderUrl;
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public String getQqUserHeaderUrl() {
+		return qqUserHeaderUrl;
+	}
+	public void setQqUserHeaderUrl(String qqUserHeaderUrl) {
+		this.qqUserHeaderUrl = qqUserHeaderUrl;
+	}
+	
+	
+	
+
+}

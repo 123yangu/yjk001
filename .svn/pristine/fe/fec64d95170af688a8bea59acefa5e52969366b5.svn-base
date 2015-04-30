@@ -1,0 +1,84 @@
+package com.yeehealth.yjk.activity.ui;
+
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.yeehealth.yjk.R;
+import com.yeehealth.yjk.activity.base.BaseActivity;
+import com.yeehealth.yjk.utils.StringUtils;
+import com.yeehealth.yjk.utils.ToastUtils;
+
+public class BindingEmailFirstAcitivity extends BaseActivity implements
+		OnClickListener {
+	/** 邮箱输入框 */
+	private EditText et_email;
+	/** 下一步按钮 */
+	private Button btn_next;
+	/** 返回按钮 */
+	private ImageButton ib_back;
+	/** 标题 */
+	private TextView tv_title;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.layout_bindingemail_first);
+		findViewById();
+		initView();
+		initListener();
+	}
+
+	@Override
+	protected void findViewById() {
+		et_email = (EditText) findViewById(R.id.et_email);
+		btn_next = (Button) findViewById(R.id.btn_next);
+		ib_back = (ImageButton) findViewById(R.id.ib_back);
+		tv_title = (TextView) findViewById(R.id.tv_title);
+	}
+
+	@Override
+	protected void initView() {
+		tv_title.setText("绑定邮箱");
+	}
+
+	@Override
+	protected void initListener() {
+		btn_next.setOnClickListener(this);
+		ib_back.setOnClickListener(this);
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.btn_next:
+			checkEmail();
+			break;
+		case R.id.ib_back:
+			finish();
+			break;
+		default:
+			break;
+		}
+	}
+
+	private boolean checkEmail() {
+		String email=et_email.getText().toString().trim();
+		if(StringUtils.isEmpty(email)){
+			ToastUtils.showMessage("邮件不能为空", BindingEmailFirstAcitivity.this);
+			return false;
+		}else if(StringUtils.isEmail(email)){
+			return true;
+		}else{
+			ToastUtils.showMessage("您输入的邮件格式不合法", this);
+			return false;
+		}
+	}
+
+}

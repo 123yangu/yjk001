@@ -1,0 +1,73 @@
+package com.yeehealth.yjk;
+
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.yeehealth.yjk.activity.base.BaseActivity;
+import com.yeehealth.yjk.utils.QQLoginUtils;
+
+public class MainActivity extends BaseActivity implements OnClickListener {
+	
+	/**qq第三方登陆*/
+	private ImageView qq_img;
+	/**用户头像*/
+	private ImageView user_image_header;
+	/**账号*/
+	private EditText et_account;
+	/**密码*/
+	private EditText et_password;
+	/**登陆按钮*/
+	private EditText bt_login;
+	/**注册账号*/
+	private TextView tv_register;
+	/**忘记密码*/
+	private TextView tv_forget_pwd;
+	
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+	}
+
+	@Override
+	protected void findViewById() {
+		qq_img = (ImageView) findViewById(R.id.qq_img);
+		user_image_header = (ImageView) findViewById(R.id.user_image_header);
+		et_account = (EditText) findViewById(R.id.et_account);
+		et_password = (EditText) findViewById(R.id.et_password);
+		bt_login = (EditText) findViewById(R.id.bt_login);
+		tv_register = (TextView) findViewById(R.id.tv_register);
+		tv_forget_pwd = (TextView) findViewById(R.id.tv_forget_pwd);
+		
+	}
+
+	@Override
+	protected void initView() {
+		
+	}
+
+	@Override
+	protected void initListener() {
+		qq_img.setOnClickListener(this);
+		
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.qq_img:
+			break;
+
+		default:
+			break;
+		}
+		
+	}
+
+
+}

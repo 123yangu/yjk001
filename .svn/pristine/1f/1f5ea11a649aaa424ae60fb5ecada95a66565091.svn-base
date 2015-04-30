@@ -1,0 +1,72 @@
+package com.yeehealth.yjk.http.utils;
+
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+
+import android.os.Handler;
+import android.os.Message;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.yeehealth.yjk.json.bean.JsonBean;
+import com.yeehealth.yjk.json.bean.QQLoginReslutJsonBean;
+import com.yeehealth.yjk.json.bean.QQUserBean;
+import com.yeehealth.yjk.utils.Constant;
+
+public class SingletonHttpConnetManger {
+	private static SingletonHttpConnetManger instance;  
+	private SingletonHttpConnetManger (){}  
+	/***
+	 * @Title: getInstance 
+	 * @Description: 线程安全的单列模式
+	 * @return  SingletonHttpConnetManger 
+	 * @author 	陈昌燕
+	 * @date2015-3-19,下午1:59:10
+	 * @Copyright: 2015 深圳市壹键康科技有限公司. All rights reserved.
+	 * @throws
+	 */
+	public static synchronized SingletonHttpConnetManger getInstance() {  
+		if (instance == null) {  
+			instance = new SingletonHttpConnetManger();  
+		}  
+		return instance;  
+	}
+
+	/**
+	 * @param <T>
+	 * @param mHandler 
+	 * @Title: userLoginType 
+	 * @Description: qq第三方登陆请求服务端
+	 * @param qqUserBean  void 
+	 * @author 	陈昌燕
+	 * @date2015-3-19,下午1:59:30
+	 * @Copyright: 2015 深圳市壹键康科技有限公司. All rights reserved.
+	 * @throws
+	 */
+	public <T> void userLoginType(QQUserBean qqUserBean, final Handler mHandler,final HashMap<String, String> params,final JsonBean<T> bean) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				Message msg = new Message();
+				try {
+					byte[] bt = HttpUtils.useHttpClientGetData(HttpUtils.POST,
+							null, params, Constant.OPPENQQ_LOGIN_URL);
+					String str = new String(bt, "UTF-8");
+					Gson gson = new Gson();
+					JsonBean<T> bean = gson.fromJson(str, new TypeToken<JsonBean<T>>(){}.getType());
+					if(bean != null && bean.getStatus().equals("200")){
+						msg.obj = bean;
+						msg.what = Constant.SERVER_VALIDATION_QQLOGIN_SUCCEED;
+					}else{
+						msg.obj = bean;
+						msg.what = Constant.GET_REQUEST_FAIL;
+					}
+				} catch (UnsupportedEncodingException e) {
+					msg.obj = "网络异常";
+					msg.what = Constant.GET_REQUEST_FAIL;
+				}
+				mHandler.sendMessage(msg);
+			}
+		}).start();
+	}  
+}

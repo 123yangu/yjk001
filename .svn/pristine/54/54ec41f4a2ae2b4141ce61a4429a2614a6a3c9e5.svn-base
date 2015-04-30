@@ -1,0 +1,79 @@
+package com.yeehealth.yjk.activity.ui;
+
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.yeehealth.yjk.R;
+import com.yeehealth.yjk.R.layout;
+import com.yeehealth.yjk.activity.base.BaseActivity;
+import com.yeehealth.yjk.utils.StringUtils;
+
+public class ForgetPasswordSecondActivity extends BaseActivity implements OnClickListener {
+	/** 密码输入框*/
+	private EditText et_pwd;
+	/** 再次输入密码框*/
+	private EditText et_pwd_again;
+	/** 完成按钮*/
+	private Button btn_finish;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.layout_register_second);
+		findViewById();
+		initView();
+		initListener();
+	}
+	@Override
+	protected void findViewById() {
+		et_pwd = (EditText) findViewById(R.id.et_pwd);
+		et_pwd_again = (EditText) findViewById(R.id.et_pwd_again);
+		btn_finish = (Button) findViewById(R.id.btn_finish);
+	}
+
+	@Override
+	protected void initView() {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	protected void initListener() {
+		btn_finish.setOnClickListener(this);
+	}
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.btn_finish:
+			if (checkPwd()) {
+				changePwd();
+			}
+			break;
+
+		default:
+			break;
+		}
+	}
+	private void changePwd() {
+		// TODO Auto-generated method stub
+
+	}
+	private boolean checkPwd() {
+		String pwd = et_pwd.getText().toString().trim();
+		String pwd_again = et_pwd_again.getText().toString().trim();
+		if (StringUtils.isEmpty(pwd) || StringUtils.isEmpty(pwd_again)) {
+			Toast.makeText(this, "密码不能为空", 0).show();
+			return false;
+		} else if (!pwd.equals(pwd_again)) {
+			Toast.makeText(this, "两次输入的密码不一致", 0).show();
+			return false;
+		} else {
+			return true;
+		}
+
+	}
+}

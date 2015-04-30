@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_yeehealth_main"
+    android:orientation="vertical" >
+
+    <include layout="@layout/layout_title" />
+
+    <View
+        style="@style/view_down_line"
+        android:layout_marginTop="10dp" />
+
+    <EditText
+        android:id="@+id/et_oldpwd"
+        style="@style/rectangular_four_edges_spacing"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:hint="请输入原密码"
+        android:inputType="textPassword"
+        android:textColor="@color/color_gray" />
+
+    <View style="@style/view_down_line" />
+
+    <EditText
+        android:id="@+id/et_newpwd"
+        style="@style/rectangular_four_edges_spacing"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:hint="请输入新密码"
+        android:inputType="textPassword"
+        android:textColor="@color/color_gray" />
+
+    <View style="@style/view_down_line" />
+
+    <EditText
+        android:id="@+id/et_newpwd_again"
+        style="@style/rectangular_four_edges_spacing"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:hint="请再次确认密码"
+        android:inputType="textPassword"
+        android:textColor="@color/color_gray" />
+
+    <View style="@style/view_down_line" />
+
+    <Button
+        android:id="@+id/btn_finish_changepwd"
+        style="@style/btn"
+        android:layout_marginTop="100dp"
+        android:text="完成" />
+
+</LinearLayout>

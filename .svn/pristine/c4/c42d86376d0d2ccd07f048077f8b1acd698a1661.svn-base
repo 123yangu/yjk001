@@ -1,0 +1,82 @@
+package com.yeehealth.yjk.activity.ui;
+
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
+import com.yeehealth.yjk.R;
+import com.yeehealth.yjk.R.layout;
+import com.yeehealth.yjk.activity.base.BaseActivity;
+
+/**
+ * @ClassName ChangePasswordActivity
+ * @Description 修改密码
+ * @author 谭元元
+ * @Copyright 2015, 深圳壹键康科技有限公司 All Rights Reserved.
+ * @date 2015-3-17,下午3:09:48
+ */
+public class ChangePasswordActivity extends BaseActivity implements
+		OnClickListener {
+	/** 旧密码输入框 */
+	private EditText et_oldpwd;
+	/** 新密码输入框 */
+	private EditText et_newpwd;
+	/** 确认新密码输入框 */
+	private EditText et_newpwd_again;
+	/** 修改完成按钮 */
+	private Button btn_finish_changepwd;
+	/** 返回按钮 */
+	private ImageButton ib_back;
+	/** 标题 */
+	private TextView tv_title;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.layout_change_password);
+		findViewById();
+		initView();
+		initListener();
+	}
+
+	@Override
+	protected void findViewById() {
+		et_oldpwd = (EditText) findViewById(R.id.et_oldpwd);
+		et_newpwd = (EditText) findViewById(R.id.et_newpwd);
+		et_newpwd_again = (EditText) findViewById(R.id.et_newpwd_again);
+		btn_finish_changepwd = (Button) findViewById(R.id.btn_finish_changepwd);
+		ib_back = (ImageButton) findViewById(R.id.ib_back);
+		tv_title = (TextView) findViewById(R.id.tv_title);
+	}
+
+	@Override
+	protected void initView() {
+		tv_title.setText("修改密码");
+	}
+
+	@Override
+	protected void initListener() {
+		btn_finish_changepwd.setOnClickListener(this);
+		ib_back.setOnClickListener(this);
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.btn_finish_changepwd:
+
+			break;
+		case R.id.ib_back:
+			finish();
+			break;
+		default:
+			break;
+		}
+	}
+
+}

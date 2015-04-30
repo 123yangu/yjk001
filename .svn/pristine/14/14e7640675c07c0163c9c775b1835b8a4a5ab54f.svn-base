@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/color_yeehealth_user" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/color_yeehealth_user" >
+
+        <ImageButton
+            android:id="@+id/ib_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dip"
+            android:background="@null"/>
+
+
+
+        <TextView
+            android:id="@+id/tv_login"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/str_login"
+            android:textColor="@color/color_black"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/tv_register"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignRight="@id/tv_login"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingRight="10dip"
+            android:text="@string/str_register"
+            android:textColor="@color/color_black"
+            android:textSize="18dp" />
+    </RelativeLayout>
+
+    <View
+        style="@style/view_down_line"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

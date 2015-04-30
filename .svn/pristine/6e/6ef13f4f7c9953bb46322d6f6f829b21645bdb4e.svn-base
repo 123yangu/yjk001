@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yeehealth.yjk"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="18" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- SDK2.1新增获取用户位置信息 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.NoTitleBar" >
+        <activity
+            android:name="com.yeehealth.yjk.activity.manager.AppStart"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- 主页 -->
+        <activity android:name="com.yeehealth.yjk.MainActivity" >
+        </activity>
+        <!-- 注册第一步 -->
+        <activity android:name="com.yeehealth.yjk.activity.ui.RegisterFirstActivity" >
+        </activity>
+        <!-- 注册第二步 -->
+        <activity android:name="com.yeehealth.yjk.activity.ui.RegisterSecondActivity" >
+        </activity>
+        <!-- 忘记密码第一步 -->
+        <activity android:name="com.yeehealth.yjk.activity.ui.ForgetPasswordFirstActivity" >
+        </activity>
+        <!-- 忘记密码第二步 -->
+        <activity android:name="com.yeehealth.yjk.activity.ui.ForgetPasswordSecondActivity" >
+        </activity>
+        <!-- 修改用户名 -->
+        <activity android:name="com.yeehealth.yjk.activity.ui.ChangeUserNameActivity" >
+        </activity>
+        <!-- 修改用户名 -->
+        <activity android:name="com.yeehealth.yjk.activity.ui.ChangePasswordActivity" >
+        </activity>
+        <!-- 绑定邮箱第一步 -->
+        <activity android:name="com.yeehealth.yjk.activity.ui.BindingEmailFirstAcitivity" >
+        </activity>
+        <!-- 绑定邮箱 第二步 -->
+        <activity android:name="com.yeehealth.yjk.activity.ui.BindingEmailSecondAcitivity" >
+        </activity>
+        <!-- 设置昵称 -->
+        <activity android:name="com.yeehealth.yjk.activity.ui.SetNicknameActivity" >
+        </activity>
+        <!-- 腾讯lib验证用户 -->
+         <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tencent222222" />
+            </intent-filter>
+        </activity>
+        
+           <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+           
+>>>>>>> .r46
+    </application>
+
+</manifest>

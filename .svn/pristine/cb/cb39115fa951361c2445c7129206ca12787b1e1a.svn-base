@@ -1,0 +1,106 @@
+package com.yeehealth.yjk.activity.ui;
+
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.yeehealth.yjk.R;
+import com.yeehealth.yjk.activity.base.BaseActivity;
+import com.yeehealth.yjk.json.bean.QQUserBean;
+import com.yeehealth.yjk.utils.StringUtils;
+import com.yeehealth.yjk.widget.cache.volley.ImageCacheManager;
+import com.yeehealth.yjk.widget.circleimg.CircleImageView;
+
+public class AccountLoginActivity extends BaseActivity implements OnClickListener {
+	/** 返回按钮 */
+	private ImageButton ib_back;
+	/** 用户头像 */
+	private CircleImageView account_image_header;
+	/** 昵称 */
+	private TextView tv_nickname;
+
+	private Bitmap bitmap;
+	/** 账户顶部个人信息 */
+	private RelativeLayout rl_account_top;
+	/** 修改密码 */
+	private RelativeLayout rl_change_pwd;
+	/** 用户名 */
+	private RelativeLayout rl_change_username;
+	/** 绑定邮箱 */
+	private RelativeLayout rl_bind_email;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.layout_login_succeed);
+		findViewById();
+		initView();
+		initListener();
+	}
+
+	@Override
+	protected void findViewById() {
+		ib_back = (ImageButton) findViewById(R.id.ib_back);
+		account_image_header = (CircleImageView) findViewById(R.id.account_image_header);
+		tv_nickname = (TextView) findViewById(R.id.tv_nickname);
+		rl_account_top = (RelativeLayout) findViewById(R.id.rl_account_top);
+		rl_change_pwd = (RelativeLayout) findViewById(R.id.rl_change_pwd);
+		rl_change_username = (RelativeLayout) findViewById(R.id.rl_change_username);
+		rl_bind_email = (RelativeLayout) findViewById(R.id.rl_bind_email);
+	}
+
+	@Override
+	protected void initView() {
+		ib_back.setVisibility(View.GONE);
+		QQUserBean qqUserBean = (QQUserBean) getIntent().getSerializableExtra(
+				"qqUserBean");
+		if(qqUserBean != null){
+			if(!StringUtils.isEmpty(qqUserBean.getFigureurl_qq_2())){
+				account_image_header.setImageUrl(qqUserBean.getFigureurl_qq_2(),ImageCacheManager.getInstance().getImageLoader());
+				account_image_header.setBorderColor(res.getColor(R.color.color_header_border));
+				account_image_header.setBorderWidth(2);
+			}
+			tv_nickname.setText(qqUserBean.getNickname());
+		}
+
+	}
+
+	@Override
+	protected void initListener() {
+		rl_account_top.setOnClickListener(this);
+		rl_change_pwd.setOnClickListener(this);
+		rl_change_username.setOnClickListener(this);
+		rl_bind_email.setOnClickListener(this);
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.rl_account_top:
+			Intent setnicknameIntent=new Intent(this, SetNicknameActivity.class);
+			startActivity(setnicknameIntent);
+			break;
+		case R.id.rl_change_pwd:
+			Intent changepwdIntent=new Intent(this, ChangePasswordActivity.class);
+			startActivity(changepwdIntent);
+			break;
+		case R.id.rl_change_username:
+			Intent changeusernameIntent=new Intent(this, ChangeUserNameActivity.class);
+			startActivity(changeusernameIntent);
+			break;
+		case R.id.rl_bind_email:
+			Intent bindemailIntent=new Intent(this, BindingEmailFirstAcitivity.class);
+			startActivity(bindemailIntent);
+			break;
+
+		default:
+			break;
+		}
+	}
+
+}

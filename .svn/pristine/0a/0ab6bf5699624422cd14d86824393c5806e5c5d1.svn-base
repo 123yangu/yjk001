@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_yeehealth_main"
+    android:orientation="vertical" >
+
+    <include layout="@layout/layout_title" />
+
+    <View
+        style="@style/view_down_line"
+        android:layout_marginTop="10dip" />
+
+    <RelativeLayout
+        android:id="@+id/rl_account_top"
+        style="@style/rectangular_four_edges_spacing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white" >
+
+        <com.yeehealth.yjk.widget.circleimg.CircleImageView
+            android:id="@+id/account_image_header"
+            android:layout_width="85dip"
+            android:layout_height="85dip"
+            android:src="@drawable/default_user_gray_image"
+            />
+
+        <LinearLayout
+            style="@style/rectangular_four_edges_spacing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/account_image_header"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_not_seting_nickname"
+                android:textColor="@color/color_black"
+                android:textSize="20dip" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dip"
+                android:text="账号:13246621731"
+                android:textColor="@color/color_light_gray"
+                android:textSize="18dip" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/arrow" />
+    </RelativeLayout>
+
+    <View style="@style/view_down_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:background="@color/white"
+        android:orientation="vertical" >
+
+        <View style="@style/view_down_line" />
+
+        <RelativeLayout
+            android:id="@+id/rl_change_pwd"
+            style="@style/rectangular_four_edges_spacing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/update_pwd_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/account_pwd" />
+
+            <TextView
+                android:id="@+id/tv_update_pwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/update_pwd_img"
+                android:paddingLeft="15dip"
+                android:text="@string/str_update_pwd"
+                android:textColor="@color/color_black"
+                android:textSize="18dip" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/arrow" />
+        </RelativeLayout>
+
+        <View
+            style="@style/view_down_line"
+            android:layout_marginLeft="65dip" />
+
+        <RelativeLayout
+             android:id="@+id/rl_change_username"
+            style="@style/rectangular_four_edges_spacing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/account_user_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/account_user" />
+
+            <TextView
+                android:id="@+id/tv_account_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/account_user_img"
+                android:paddingLeft="15dip"
+                android:text="@string/str_account_name"
+                android:textColor="@color/color_black"
+                android:textSize="18dip" />
+            
+            
+            <ImageView
+                android:id="@+id/account_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/arrow" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/account_arrow"
+                android:layout_centerVertical="true"
+                android:text="张三"
+                android:paddingRight="5dip"
+                android:textColor="@color/color_light_gray"
+                android:textSize="18dip" />
+        </RelativeLayout>
+
+        <View
+            style="@style/view_down_line"
+            android:layout_marginLeft="65dip" />
+
+        <RelativeLayout
+            android:id="@+id/rl_bind_email"
+            style="@style/rectangular_four_edges_spacing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/account_email_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/account_email" />
+
+            <TextView
+                android:id="@+id/tv_account_email_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/account_email_img"
+                android:paddingLeft="15dip"
+                android:text="@string/str_email"
+                android:textColor="@color/color_black"
+                android:textSize="18dip" />
+
+            <ImageView
+                android:id="@+id/account_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/arrow" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/account_arrow"
+                android:paddingRight="5dip"
+                android:text="1065569664@qq.com"
+                android:textColor="@color/color_light_gray"
+                android:textSize="16dip" />
+        </RelativeLayout>
+
+        <View style="@style/view_down_line" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_logout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="70dip"
+        android:background="@drawable/btn"
+        android:text="@string/str_logout"
+        android:textColor="@color/color_login_text"
+        android:textSize="22dip" />
+
+</LinearLayout>

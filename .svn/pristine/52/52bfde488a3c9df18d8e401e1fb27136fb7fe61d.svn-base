@@ -1,0 +1,92 @@
+package com.yeehealth.yjk.activity.ui;
+
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.yeehealth.yjk.R;
+import com.yeehealth.yjk.R.layout;
+import com.yeehealth.yjk.activity.base.BaseActivity;
+import com.yeehealth.yjk.utils.StringUtils;
+
+/**
+ * @ClassName ForgetPasswordFirstActivity
+ * @Description 忘记密码第一步
+ * @author 谭元元
+ * @Copyright 2015, 深圳壹键康科技有限公司 All Rights Reserved.
+ * @date 2015-3-17,下午3:20:32
+ */
+public class ForgetPasswordFirstActivity extends BaseActivity implements
+		OnClickListener {
+	/** 手机号输入框 */
+	private EditText et_phone;
+	/** 验证码输入框 */
+	private EditText et_code;
+	/** 发送验证码按钮 */
+	private Button btn_send_code;
+	/** 下一步按钮 */
+	private Button btn_next;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.layout_register_first);
+		findViewById();
+		initView();
+		initListener();
+	}
+
+	@Override
+	protected void findViewById() {
+		et_phone = (EditText) findViewById(R.id.et_phone);
+		et_code = (EditText) findViewById(R.id.et_code);
+		btn_send_code = (Button) findViewById(R.id.btn_send_code);
+		btn_next = (Button) findViewById(R.id.btn_next);
+	}
+
+	@Override
+	protected void initView() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void initListener() {
+		btn_send_code.setOnClickListener(this);
+		btn_next.setOnClickListener(this);
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.btn_send_code:
+			if (checkPhone()) {
+				sendCode();
+			}
+			break;
+		case R.id.btn_next:
+
+			break;
+		default:
+			break;
+		}
+	}
+	private void sendCode() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private boolean checkPhone() {
+		String phone = et_phone.getText().toString().trim();
+		if (!StringUtils.isEmpty(phone)&&StringUtils.isHandset(phone)) {
+			return true;
+		} else {
+			Toast.makeText(this, "您输入的手机号不合法", 0).show();
+			return false;
+		}
+	}
+}

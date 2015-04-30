@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- yjk001项目主色调 -->
+    <color name="color_yeehealth_user">#F9F9F9</color>
+    <!-- 下划线的背景颜色 -->
+    <color name="color_down_line_color">#E5E5E5</color>
+    <!-- 登陆按钮背景颜色 -->
+    <color name="color_blue">#0099FF</color>
+    
+</resources>

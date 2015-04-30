@@ -1,0 +1,59 @@
+package com.yeehealth.yjk.utils;
+
+/**
+ * 
+ * @Title: Constant.java
+ * @Package com.yeehealth.utils
+ * @Description: 系统常量定义类（c常量都要放在此类中）
+ * @author ccy
+ * @date 2014-11-14 下午3:24:16
+ * @version V1.0
+ */
+public class Constant {
+	/**用户偏好设置*/
+	public static final String FLASH_CALENDAR_SHARED = "yjk001";
+	/**连接服务连接的端口*/
+	//public static final String NET_MAIN_HOST = "http://192.168.1.123:8080";
+	public static final String NET_MAIN_HOST = "http://192.168.1.89/lavlapi/public";
+	/**获得用户成功*/
+	public static final int GET_QQUSER_SUCCEE = 0;
+	/**请求服务失败*/
+	public static final int GET_REQUEST_FAIL = 1;
+	/**连接服务连接验证qq第三方登陆成功*/
+	public static final int SERVER_VALIDATION_QQLOGIN_SUCCEED = 2;
+	
+
+	/*************************************** ccy *******************************************/
+	/** 第三方登陆地址 */
+	public static final String OPPENQQ_LOGIN_URL = NET_MAIN_HOST+"/api/auth/social-login";
+	/**用户登录地址*/
+	public static final String USER_LOGIN_URL = NET_MAIN_HOST+"api/auth/login";
+	/*************************************** ccy *******************************************/
+
+	/*************************************** tyy *******************************************/
+	/** 注册第一步,检查手机和发送验证码 */
+	public static final String GET_CODE_URL = NET_MAIN_HOST+"/api/sms/get-code";
+	/** 注册第二步,校验验证码 */
+	public static final String VERFIY_CODE_URL = NET_MAIN_HOST+"/api/sms/verfiy-code";
+	/** 注册第三步,设置密码 */
+	public static final String SET_PWD_URL = NET_MAIN_HOST+"/api/user/set-pwd";
+	/**修改密码*/
+	public static final String CHANGE_PWD_URL=NET_MAIN_HOST+"/api/user/change-pwd";
+	/**修改昵称*/
+	public static final String SET_PROFILE_URL=NET_MAIN_HOST+"/api/profile/set-profile";
+	/**修改用户名*/
+	public static final String SET_USERNAME_URL=NET_MAIN_HOST+"/api/user/set-username";
+	/**绑定邮箱第一步,发邮件*/
+	public static final String BIND_EMAIL_URL=NET_MAIN_HOST+"/api/user/bind-email";
+	/**绑定邮箱第2步，填写所发验证码绑定*/
+	public static final String VERFIY_EMAIL_URL=NET_MAIN_HOST+"/api/user/verfiy-email";
+	/*************************************** tyy *******************************************/
+	
+	
+	/***************************************lyl*******************************************/
+	/***************************************lyl*******************************************/
+
+	/*************************************** zyl *******************************************/
+	/*************************************** zyl *******************************************/
+
+}

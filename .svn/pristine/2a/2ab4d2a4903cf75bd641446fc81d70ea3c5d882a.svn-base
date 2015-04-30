@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_yeehealth_main"
+    android:orientation="vertical" >
+
+    <include layout="@layout/layout_title" />
+
+    <View
+        style="@style/view_down_line"
+        android:layout_marginTop="10dp" />
+
+    <RelativeLayout
+        style="@style/rectangular_four_edges_spacing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white" >
+
+        <EditText
+            android:id="@+id/et_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:gravity="center_vertical|right"
+            android:hint="@string/str_phonenumber"
+            android:inputType="phone"
+            android:paddingBottom="5dip"
+            android:paddingTop="5dip"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="18dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingBottom="5dip"
+            android:paddingTop="5dip"
+            android:text="@string/str_phone"
+            android:textColor="@color/color_black"
+            android:textSize="18dp" />
+    </RelativeLayout>
+
+    <View style="@style/view_down_line" />
+
+    <RelativeLayout
+        style="@style/rectangular_four_edges_spacing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff" >
+
+        <EditText
+            android:id="@+id/et_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:gravity="center_vertical|left"
+            android:hint="@string/str_code"
+            android:inputType="number"
+            android:paddingBottom="5dip"
+            android:paddingTop="5dip"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="18dp" />
+
+        <Button
+            android:id="@+id/btn_send_code"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/btn"
+            android:text="@string/str_sendcode"
+            android:textColor="@android:color/white"
+            android:textSize="18dp" />
+    </RelativeLayout>
+
+    <View style="@style/view_down_line" />
+
+    <Button
+        android:id="@+id/btn_next"
+        style="@style/btn"
+        android:layout_marginTop="100dp"
+        android:text="@string/str_next" />
+
+</LinearLayout>

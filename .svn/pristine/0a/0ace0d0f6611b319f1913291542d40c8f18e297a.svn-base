@@ -1,0 +1,37 @@
+package com.yeehealth.yjk.activity.ui;
+
+import android.os.Bundle;
+
+import com.yeehealth.yjk.R;
+import com.yeehealth.yjk.R.layout;
+import com.yeehealth.yjk.activity.base.BaseActivity;
+
+public class ChangePasswordActivity extends BaseActivity {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.layout_change_password);
+		findViewById();
+		initView();
+		initListener();
+	}
+	@Override
+	protected void findViewById() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void initView() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void initListener() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- title栏背景色调 -->
+    <color name="color_yeehealth_user">#F8F8F8</color>
+    <!-- UI内置背景主色 -->
+    <color name="color_yeehealth_user">#F3F3F3</color>
+    
+    <!-- 下划线的背景颜色 -->
+    <color name="color_down_line_color">#E5E5E5</color>
+    <!-- 登陆按钮背景颜色 -->
+    <color name="color_blue">#0099FF</color>
+    <!-- 黑色 -->
+    <color name="color_black">#000000</color>
+    <!-- 灰色 -->
+    <color name="color_gray">#808080</color>
+
+    <!-- 登录背景 -->
+    <color name="color_login_back">#259194</color>
+    <!-- 登录字体颜色 -->
+    <color name="color_login_text">#98FFEC</color>
+    <!-- 绿色 -->
+    <color name="green">#34b45b</color>
+    <!-- 白色 -->
+    <color name="white">#ffffff</color>
+
+</resources>

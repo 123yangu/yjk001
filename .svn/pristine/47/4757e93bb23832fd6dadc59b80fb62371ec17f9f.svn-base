@@ -1,0 +1,46 @@
+package com.yeehealth.yjk.activity.ui;
+
+import com.yeehealth.yjk.R;
+import com.yeehealth.yjk.R.layout;
+import com.yeehealth.yjk.activity.base.BaseActivity;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
+import android.widget.Toast;
+
+/**
+ * @ClassName RegisterActivity
+ * @Description 注册
+ * @author 谭元元
+ * @Copyright 2015, 深圳壹键康科技有限公司 All Rights Reserved.
+ * @date 2015-3-17,上午9:41:51
+ */
+public class RegisterFirstActivity extends BaseActivity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.layout_register_first);
+		findViewById();
+		initView();
+		initListener();
+	}
+
+	@Override
+	protected void findViewById() {
+	}
+
+	@Override
+	protected void initView() {
+
+	}
+
+	@Override
+	protected void initListener() {
+	}
+
+}

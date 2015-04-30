@@ -1,0 +1,156 @@
+package com.yeehealth.yjk.activity.ui;
+
+import java.util.HashMap;
+
+import com.google.gson.Gson;
+import com.yeehealth.yjk.R;
+import com.yeehealth.yjk.R.layout;
+import com.yeehealth.yjk.activity.base.BaseActivity;
+import com.yeehealth.yjk.http.utils.HttpUtils;
+import com.yeehealth.yjk.utils.Constant;
+import com.yeehealth.yjk.utils.StringUtils;
+import com.yeehealth.yjk.utils.TUtils;
+import com.yeehealth.yjk.utils.ToastUtils;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
+/**
+ * @ClassName RegisterActivity
+ * @Description 注册
+ * @author 谭元元
+ * @Copyright 2015, 深圳壹键康科技有限公司 All Rights Reserved.
+ * @date 2015-3-17,上午9:41:51
+ */
+public class RegisterFirstActivity extends BaseActivity implements
+		OnClickListener {
+	/** 手机号输入框 */
+	private EditText et_phone;
+	/** 验证码输入框 */
+	private EditText et_code;
+	/** 发送验证码按钮 */
+	private Button btn_send_code;
+	/** 下一步按钮 */
+	private Button btn_next;
+	/** 返回按钮 */
+	private ImageButton ib_back;
+	/** 标题 */
+	private TextView tv_title;
+	/** 手机号*/
+	private String phone;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.layout_register_first);
+		findViewById();
+		initView();
+		initListener();
+	}
+
+	@Override
+	protected void findViewById() {
+		et_phone = (EditText) findViewById(R.id.et_phone);
+		et_code = (EditText) findViewById(R.id.et_code);
+		btn_send_code = (Button) findViewById(R.id.btn_send_code);
+		btn_next = (Button) findViewById(R.id.btn_next);
+		ib_back = (ImageButton) findViewById(R.id.ib_back);
+		tv_title = (TextView) findViewById(R.id.tv_title);
+	}
+
+	@Override
+	protected void initView() {
+		tv_title.setText("注册");
+	}
+
+	@Override
+	protected void initListener() {
+		btn_send_code.setOnClickListener(this);
+		btn_next.setOnClickListener(this);
+		ib_back.setOnClickListener(this);
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.btn_send_code:
+			if (checkPhone()) {
+				sendCode();
+			}
+			break;
+		case R.id.btn_next:
+
+			break;
+		case R.id.ib_back:
+			finish();
+			break;
+		default:
+			break;
+		}
+	}
+
+	/**
+	 * @Title: checkPhone
+	 * @Description: 检查手机号是否合法
+	 * @return boolean
+	 * @author 谭元元
+	 * @date2015-3-17,下午3:43:01
+	 * @Copyright: 2015 深圳市壹键康科技有限公司. All rights reserved.
+	 * @throws
+	 */
+	private boolean checkPhone() {
+		phone = et_phone.getText().toString().trim();
+		if (!StringUtils.isEmpty(phone) && StringUtils.isHandset(phone)) {
+			return true;
+		} else if (StringUtils.isEmpty(phone)) {
+			ToastUtils.showMessage("手机号不能为空", this);
+			return false;
+		} else {
+			ToastUtils.showMessage("您输入的手机号不合法", this);
+			return false;
+		}
+	}
+
+	/**
+	 * @Title: sendCode
+	 * @Description: 发送验证码 void
+	 * @author 谭元元
+	 * @date2015-3-17,下午3:42:42
+	 * @Copyright: 2015 深圳市壹键康科技有限公司. All rights reserved.
+	 * @throws
+	 */
+	private void sendCode() {
+		if (TUtils.getNetType(this) != 0) {// 判定是否有网络
+			new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+					// 得到用户名和密码，然后从服务端返回的密码进行对比
+					try {
+						HashMap<String, String> forms = new HashMap<String, String>();
+						forms.put("moblie", phone);
+						forms.put("type", "0");
+						byte[] bt = HttpUtils.useHttpClientGetData(
+								HttpUtils.POST, null, forms,
+								Constant.GET_CODE_URL);
+						String str = new String(bt, "UTF-8");
+						Gson gson = new Gson();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}).start();
+		} else {
+			// ToastUtils.showMessage("未连接网络", RegisterFirstActivity.this);
+			return;
+		}
+	}
+}

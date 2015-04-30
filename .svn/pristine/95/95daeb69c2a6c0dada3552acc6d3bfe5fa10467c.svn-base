@@ -1,0 +1,26 @@
+package com.yeehealth.yjk.json.bean;
+
+import java.io.Serializable;
+
+public class LocalLoginUser implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	/**上一次用户的头像*/
+	private String url;
+	/**上一次登陆用户名*/
+	private String userName;
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	
+
+}

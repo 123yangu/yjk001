@@ -1,0 +1,38 @@
+package com.yeehealth.yjk.activity.ui;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
+
+import com.yeehealth.yjk.R;
+import com.yeehealth.yjk.activity.base.BaseActivity;
+
+public class AccountLoginActivity extends BaseActivity{
+	private ImageButton ib_back;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.layout_login_succeed);
+		findViewById();
+		initView();
+		initListener();
+	}
+
+	@Override
+	protected void findViewById() {
+		ib_back = (ImageButton) findViewById(R.id.ib_back);
+	}
+
+	@Override
+	protected void initView() {
+		ib_back.setVisibility(View.GONE);
+		
+	}
+
+	@Override
+	protected void initListener() {
+		
+	}
+
+}

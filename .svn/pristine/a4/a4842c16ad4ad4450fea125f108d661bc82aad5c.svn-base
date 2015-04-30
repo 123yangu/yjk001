@@ -1,0 +1,67 @@
+package com.yeehealth.yjk.activity.ui;
+
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
+import com.android.volley.toolbox.ImageLoader;
+import com.yeehealth.yjk.R;
+import com.yeehealth.yjk.activity.base.BaseActivity;
+import com.yeehealth.yjk.json.bean.QQUserBean;
+import com.yeehealth.yjk.utils.StringUtils;
+import com.yeehealth.yjk.utils.Util;
+import com.yeehealth.yjk.widget.cache.volley.ImageCacheManager;
+import com.yeehealth.yjk.widget.circleimg.CircleImageView;
+
+public class AccountLoginActivity extends BaseActivity{
+	/**返回按钮*/
+	private ImageButton ib_back;
+	/**用户头像*/
+	private CircleImageView account_image_header;
+	/**昵称*/
+	private TextView tv_nickname;
+	
+	private Bitmap bitmap;
+	
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.layout_login_succeed);
+		findViewById();
+		initView();
+		initListener();
+	}
+
+	@Override
+	protected void findViewById() {
+		ib_back = (ImageButton) findViewById(R.id.ib_back);
+		account_image_header = (CircleImageView) findViewById(R.id.account_image_header);
+		tv_nickname = (TextView) findViewById(R.id.tv_nickname);
+	}
+
+	@Override
+	protected void initView() {
+		ib_back.setVisibility(View.GONE);
+		QQUserBean qqUserBean = (QQUserBean) getIntent().getSerializableExtra("qqUser");
+		if(qqUserBean != null){
+			if(!StringUtils.isEmpty(qqUserBean.getQqUserHeaderUrl())){
+//				account_image_header.setImageBitmap(qqUserBean.getQqUserHeaderBitmap());
+				account_image_header.setImageUrl(qqUserBean.getQqUserHeaderUrl(),ImageCacheManager.getInstance().getImageLoader());
+//				bitmap = Util.getbitmap(qqUserBean.getQqUserHeaderUrl());
+//				account_image_header.setImageBitmap(bitmap);
+			}
+			tv_nickname.setText(qqUserBean.getNickname());
+		}
+		
+	}
+
+	@Override
+	protected void initListener() {
+	
+	}
+
+}

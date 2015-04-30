@@ -1,0 +1,94 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_login_back"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <com.yeehealth.yjk.widget.circleimg.CircleImageView
+        android:id="@+id/user_image_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="30dip"
+        android:layout_marginTop="25dip"
+        android:src="@drawable/default_user_image" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="5dip" >
+
+        <ImageView
+            android:id="@+id/tv_account"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/user" />
+
+        <EditText
+            android:id="@+id/et_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_account"
+            android:layout_toRightOf="@id/tv_account"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="@string/str_please_input_account"
+            android:maxLength="11"
+            android:singleLine="true"
+            android:textColor="@color/color_login_text"
+            android:textColorHint="@color/color_login_text"
+            android:textSize="20dp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="2dip"
+        android:layout_marginBottom="25dip"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:background="@drawable/line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="5dip" >
+
+        <ImageView
+            android:id="@+id/tv_pasword"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/pwd" />
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_pasword"
+            android:layout_toRightOf="@id/tv_pasword"
+            android:background="@null"
+            android:hint="@string/str_please_input_password"
+            android:password="true"
+            android:singleLine="true"
+            android:textColor="@color/color_login_text"
+            android:textColorHint="@color/color_login_text"
+            android:textSize="20dp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="2dip"
+        android:layout_marginBottom="25dip"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:background="@drawable/line" />
+
+    <include layout="@layout/layout_activity_main_login_button" />
+
+</LinearLayout>

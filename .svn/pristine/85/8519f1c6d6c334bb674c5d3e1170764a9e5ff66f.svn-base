@@ -1,0 +1,12 @@
+package com.yeehealth.yjk.http.utils;
+
+public class SingletonHttpConnetManger {
+	private static SingletonHttpConnetManger instance;  
+	private SingletonHttpConnetManger (){}  
+	public static synchronized SingletonHttpConnetManger getInstance() {  
+		if (instance == null) {  
+			instance = new SingletonHttpConnetManger();  
+		}  
+		return instance;  
+	}  
+}

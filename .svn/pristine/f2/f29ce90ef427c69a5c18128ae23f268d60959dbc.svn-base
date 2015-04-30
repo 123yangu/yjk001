@@ -1,0 +1,332 @@
+package com.yeehealth.yjk;
+
+import java.util.HashMap;
+
+import org.json.JSONObject;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.SystemClock;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.internal.StringMap;
+import com.tencent.connect.UserInfo;
+import com.tencent.connect.common.Constants;
+import com.tencent.tauth.IUiListener;
+import com.tencent.tauth.Tencent;
+import com.tencent.tauth.UiError;
+import com.yeehealth.yjk.activity.base.BaseActivity;
+import com.yeehealth.yjk.activity.ui.AccountLoginActivity;
+import com.yeehealth.yjk.activity.ui.ForgetPasswordFirstActivity;
+import com.yeehealth.yjk.activity.ui.RegisterFirstActivity;
+import com.yeehealth.yjk.http.utils.SingletonHttpConnetManger;
+import com.yeehealth.yjk.json.bean.JsonBean;
+import com.yeehealth.yjk.json.bean.QQLoginReslutJsonBean;
+import com.yeehealth.yjk.json.bean.QQResultJsonBean;
+import com.yeehealth.yjk.json.bean.QQUserBean;
+import com.yeehealth.yjk.utils.Constant;
+import com.yeehealth.yjk.utils.LogUtil;
+import com.yeehealth.yjk.utils.SPUtil;
+import com.yeehealth.yjk.utils.StringUtils;
+import com.yeehealth.yjk.utils.TUtils;
+import com.yeehealth.yjk.utils.ToastUtils;
+import com.yeehealth.yjk.utils.Util;
+import com.yeehealth.yjk.widget.circleimg.CircleImageView;
+
+/**
+ * @ClassName MainActivity
+ * @Description 应用入口
+ * @author 陈昌燕
+ * @Copyright 2015, 深圳壹键康科技有限公司 All Rights Reserved.
+ * @date 2015-3-18,下午1:47:31
+ */
+public class MainActivity extends BaseActivity implements OnClickListener {
+
+	/** qq第三方登陆 */
+	private ImageView qq_img;
+	/** 用户头像 */
+	private CircleImageView user_image_header;
+	/** 账号 */
+	private EditText et_account;
+	/** 密码 */
+	private EditText et_password;
+	/** 登陆按钮 */
+	private Button bt_login;
+	/** 注册账号 */
+	private TextView tv_register;
+	/** 忘记密码 */
+	private TextView tv_forget_pwd;
+	/**腾讯解析qq用户的实体*/
+	private UserInfo mInfo;
+	public static Tencent mTencent;
+	/**qq头像url*/
+	private String mUserHeaderUrl;
+	/**
+	 * 腾讯appid
+	 */
+	public static String mAppid = "222222";
+	private Handler mHandler = new Handler() {
+
+		@Override
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case Constant.GET_REQUEST_FAIL:
+				ToastUtils.showMessage(msg.obj.toString(), getApplicationContext());
+				break;
+			case Constant.GET_QQUSER_SUCCEE:
+				//获得qq用户的信息成功，请求服务端
+				QQUserBean qqUserBean = (QQUserBean) msg.obj;
+				/*把qq头像保存下来*/
+				SPUtil.saveObjectExt(getApplicationContext(), "qqInfo", qqUserBean);
+				break;
+			case Constant.SERVER_VALIDATION_QQLOGIN_SUCCEED:
+				if (mTencent != null && mTencent.isSessionValid()) {
+					StringMap<QQLoginReslutJsonBean> stringMap = new StringMap<QQLoginReslutJsonBean>();
+					stringMap =  (StringMap<QQLoginReslutJsonBean>) msg.obj;
+					Gson gson = new Gson();
+					String str = gson.toJson(stringMap);
+					QQLoginReslutJsonBean loginReslutJsonBean = gson.fromJson(str, QQLoginReslutJsonBean.class);
+					Intent loginIntent = new Intent(getApplicationContext(),AccountLoginActivity.class);
+					loginIntent.putExtra("userBean", loginReslutJsonBean);
+					startActivity(loginIntent);
+				}
+				break;
+
+			default:
+				break;
+			}
+		}
+
+	};
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		findViewById();
+		initView();
+		initListener();
+	}
+
+	protected void userLoginType(QQResultJsonBean qqUserBean) {
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("openid", qqUserBean.getOpenid());
+		params.put("provider", "qq");
+		params.put("device_id", TUtils.getPhoneIMEI(getApplicationContext()).toString());
+		params.put("access_token", qqUserBean.getAccess_token());
+		
+		JsonBean<QQLoginReslutJsonBean> jsonBean = null;
+		SingletonHttpConnetManger.getInstance().userLoginType(mHandler,params,jsonBean);
+	}
+
+	@Override
+	protected void findViewById() {
+		qq_img = (ImageView) findViewById(R.id.qq_img);
+		user_image_header = (CircleImageView) findViewById(R.id.user_image_header);
+		et_account = (EditText) findViewById(R.id.et_account);
+		et_password = (EditText) findViewById(R.id.et_password);
+		bt_login = (Button) findViewById(R.id.bt_login);
+		tv_register = (TextView) findViewById(R.id.tv_register);
+		tv_forget_pwd = (TextView) findViewById(R.id.tv_forget_pwd);
+
+	}
+
+	@Override
+	protected void initView() {
+		if (mTencent == null) {//创建一个腾讯实例
+			mTencent = Tencent.createInstance(mAppid, this);
+		}
+	}
+
+	@Override
+	protected void initListener() {
+		qq_img.setOnClickListener(this);
+		tv_register.setOnClickListener(this);
+		tv_forget_pwd.setOnClickListener(this);
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.qq_img:
+			onClickLogin();
+			break;
+		case R.id.tv_register:
+			Intent registerIntent = new Intent(MainActivity.this,
+					RegisterFirstActivity.class);
+			startActivity(registerIntent);
+			break;
+		case R.id.tv_forget_pwd:
+			Intent forgetIntent = new Intent(MainActivity.this,
+					ForgetPasswordFirstActivity.class);
+			startActivity(forgetIntent);
+			break;
+		default:
+			break;
+		}
+
+	}
+
+	/**
+	 * @ClassName BaseUiListener
+	 * @Description 监听qq登陆是否成功
+	 * @author 陈昌燕
+	 * @Copyright 2015, 深圳壹键康科技有限公司 All Rights Reserved.
+	 * @date 2015-3-18,下午1:51:12
+	 */
+	private class BaseUiListener implements IUiListener {
+
+		@Override
+		public void onComplete(Object response) {
+			if (null == response) {
+				ToastUtils.showMessage("返回为空,登录失败",getApplicationContext());
+				return;
+			}
+			JSONObject jsonResponse = (JSONObject) response;
+			if (null != jsonResponse && jsonResponse.length() == 0) {
+				ToastUtils.showMessage("返回为空,登录失败",getApplicationContext());
+				return;
+			}
+			String loginResult = response.toString();
+			Gson gson = new Gson();
+			QQResultJsonBean qqResultJsonBean = gson.fromJson(loginResult, QQResultJsonBean.class);
+			userLoginType(qqResultJsonBean);
+			LogUtil.e("ccy", loginResult);
+			// 有奖分享处理
+			// handlePrizeShare();
+			doComplete((JSONObject)response);
+		}
+
+		protected void doComplete(JSONObject values) {
+			Log.e("ccy", values.toString());
+		}
+
+		@Override
+		public void onError(UiError e) {
+			Util.toastMessage(MainActivity.this, "onError: " + e.errorDetail);
+			Util.dismissDialog();
+		}
+
+		@Override
+		public void onCancel() {
+			Util.toastMessage(MainActivity.this, "onCancel: ");
+			Util.dismissDialog();
+		}
+	}
+
+	/**
+	 * @Title: initOpenidAndToken 
+	 * @Description: 验证用户
+	 * @param jsonObject  void 
+	 * @author 	陈昌燕
+	 * @date2015-3-18,下午1:51:38
+	 * @Copyright: 2015 深圳市壹键康科技有限公司. All rights reserved.
+	 * @throws
+	 */
+	public static void initOpenidAndToken(JSONObject jsonObject) {
+		try {
+			String token = jsonObject.getString(Constants.PARAM_ACCESS_TOKEN);
+			String expires = jsonObject.getString(Constants.PARAM_EXPIRES_IN);
+			String openId = jsonObject.getString(Constants.PARAM_OPEN_ID);
+			if (!TextUtils.isEmpty(token) && !TextUtils.isEmpty(expires)
+					&& !TextUtils.isEmpty(openId)) {
+				mTencent.setAccessToken(token, expires);
+				mTencent.setOpenId(openId);
+			}
+		} catch(Exception e) {
+		}
+	}
+
+
+
+	IUiListener loginListener = new BaseUiListener() {
+		@Override
+		protected void doComplete(JSONObject values) {
+			Log.d("SDKQQAgentPref", "AuthorSwitch_SDK:" + SystemClock.elapsedRealtime());
+			initOpenidAndToken(values);
+			updateUserInfo();
+		}
+
+	};
+
+	private void onClickLogin() {
+		if (!mTencent.isSessionValid()) {
+			mTencent.login(this, "all", loginListener);
+			Log.d("SDKQQAgentPref", "FirstLaunch_SDK:" + SystemClock.elapsedRealtime());
+		} else {
+			mTencent.logout(this);
+			updateUserInfo();
+		}
+	}
+
+	/**
+	 * @Title: updateUserInfo 
+	 * @Description: 修改用户信息
+	 * @author 	陈昌燕
+	 * @date2015-3-18,下午1:53:47
+	 * @Copyright: 2015 深圳市壹键康科技有限公司. All rights reserved.
+	 * @throws
+	 */
+	private void updateUserInfo() {
+		if (mTencent != null && mTencent.isSessionValid()) {
+			IUiListener listener = new IUiListener() {
+				@Override
+				public void onError(UiError e) {
+				}
+				@Override
+				public void onComplete(final Object response) {
+					new Thread(){
+						@Override
+						public void run() {
+							JSONObject json = (JSONObject)response;
+							Message msg = new Message();
+							Gson gson = new Gson();
+							String strJson = json.toString();
+							if(!StringUtils.isEmpty(strJson)){
+								QQUserBean qqUserBean = null;
+								try {
+									qqUserBean = gson.fromJson(strJson, QQUserBean.class);
+									msg.obj = qqUserBean;
+									msg.what = Constant.GET_QQUSER_SUCCEE;
+								} catch (JsonSyntaxException e) {
+									msg.what = Constant.GET_REQUEST_FAIL;
+									msg.obj = qqUserBean.getMsg();
+								}
+							}
+							mHandler.sendMessage(msg);
+						}
+
+					}.start();
+				}
+
+				@Override
+				public void onCancel() {
+				}
+			};
+			mInfo = new UserInfo(this, mTencent.getQQToken());
+			mInfo.getUserInfo(listener);
+		} 
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == RESULT_OK) {
+			String resulData = data.getStringExtra(Constants.LOGIN_INFO);//qq登陆失败后返回的错误信息
+			ToastUtils.showMessage(resulData, getApplicationContext());
+		}
+
+	}
+
+}
